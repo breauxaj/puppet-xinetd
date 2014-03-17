@@ -1,4 +1,6 @@
-class xinetd {
+class xinetd (
+  $ensure = 'latest'
+){
   $required = $::operatingsystem ? {
     /(?i-mx:centos|fedora|redhat|scientific)/ => 'xinetd',
   }
@@ -7,7 +9,7 @@ class xinetd {
     /(?i-mx:centos|fedora|redhat|scientific)/ => '/etc/xinetd.d',
   }
 
-  package { $required: ensure => latest }
+  package { $required: ensure => $ensure }
 
   file { $path:
     ensure => directory,
